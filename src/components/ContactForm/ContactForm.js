@@ -23,28 +23,29 @@ export const ContactForm = () => {
     const normalizedName = newContact.name.toLowerCase();
     let duplicatedName = contactName.some(
       contact => contact.name.toLowerCase() === normalizedName
-    );
+     );
+     
     if (duplicatedName) {
       alert(`${newContact.name} is already in contacts.`);
       return;
     }
-    dispatch(addContact({ ...newContact, id: nanoid }));
+    dispatch(addContact({ ...newContact, id: nanoid() }));
   };
 
-    return (
-        <FormContainer>
-             <Formik
-                initialValues={{
-                    name: '',
-                    number: '',
-                }}
-                validationSchema={SignupSchema}
+  return (
+    <FormContainer>
+      <Formik
+        initialValues={{
+          name: '',
+          number: '',
+        }}
+        validationSchema={SignupSchema}
         onSubmit={(values, actions) => {
-            onAdd(values, contactName);
-            actions.resetForm();
-            }}
-            >
-                <Form>
+          onAdd(values, contactName);
+          actions.resetForm();
+        }}
+      >
+        <Form>
           <div className="container">
             <label htmlFor="name">Name</label>
             <Field id="name" name="name" placeholder="Jane" />

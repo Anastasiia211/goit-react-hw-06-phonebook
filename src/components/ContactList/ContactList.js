@@ -5,16 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export const ContactList = () => {
     const dispatch = useDispatch();
-    const valueFilter = useSelector(state => state.filter.filter);
-    const valueContacts = useSelector(state => state.contacts.contacts);
+    const filterValue = useSelector(state => state.filter.filter);
+    const contactsValue = useSelector(state => state.contacts.contacts);
 
-    const visibleContacts = valueContacts.filter(contact => {
-        const normalizedFilter = valueFilter.toLowerCase();
+    const visibleContacts = contactsValue.filter(contact => {
+        const normalizedFilter = filterValue.toLowerCase();
         return contact.name.toLowerCase().includes(normalizedFilter);
     });
 
     const onDelete = evt => {
-        const contactsFiltered = valueContacts.filter(
+        const contactsFiltered = contactsValue.filter(
             contact => contact.name !== evt.target.id
         );
         dispatch
